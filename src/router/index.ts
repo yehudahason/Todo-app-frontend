@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/views/Home.vue";
+import Home from "@/views/HomePage.vue";
 import Todo from "@/views/TodoTask.vue";
 import NotFound from "@/views/NotFound.vue";
 import Slide from "@/views/SlideShow.vue";
