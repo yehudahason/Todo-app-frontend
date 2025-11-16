@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import Head2 from "@/components/Head2.vue";
+import HeadComponent from "@/components/HeadComponent.vue";
 import { onMounted, ref } from "vue";
-const todoArray = ref();
+
+interface Todo {
+  id: string;
+  title: string;
+  completed: boolean;
+  // add more fields if you have them
+}
+
+const todoArray = ref<Todo[]>([]);
 const title = ref("");
 const banner = ref("");
-const done = ref(false);
-const fading = ref(false);
 const task = ref({});
 onMounted(() => {
   const user = localStorage.getItem("email");
@@ -24,6 +30,7 @@ async function fetchTasks() {
     });
 
     todoArray.value = await res.json();
+    console.log(todoArray.value);
     if (res.status === 401) {
       localStorage.setItem("email", "");
       window.location.href = "/";
@@ -71,10 +78,16 @@ async function setDone(id: string, completed: boolean) {
       },
       body: JSON.stringify({ completed }),
     });
+    if (res.ok) {
+      const elr = todoArray.value.find((el) => el.id === id);
+      if (elr) {
+        elr.completed = true;
+      }
+    }
   } catch (err) {
     console.log(err);
   }
-  fetchTasks();
+  // fetchTasks();
   if (completed) {
     setTimeout(async () => {
       await deleteEl(id);
@@ -88,7 +101,9 @@ async function deleteEl(id: string) {
       method: "DELETE",
       credentials: "include",
     });
-    fetchTasks();
+    if (res.ok) {
+      fetchTasks();
+    }
   } catch (err) {
     console.log(err);
   }
@@ -96,7 +111,7 @@ async function deleteEl(id: string) {
 </script>
 
 <template>
-  <Head2 head="Todo" />
+  <HeadComponent head="Todo" />
   <div class="container2">
     <div class="addTask">
       <p>ADD TASK</p>
@@ -109,17 +124,15 @@ async function deleteEl(id: string) {
     </div>
 
     <div class="list-container">
-      <div class="list-container">
-        <div v-for="el in todoArray" :key="el.id" class="task" :class="{ fade: el.completed }">
-          <span>*</span>
+      <div v-for="el in todoArray" :key="el.id" class="task" :class="{ fade: el.completed }">
+        <span>*</span>
 
-          <p>
-            <b>{{ el.title }}</b>
-          </p>
+        <p>
+          <b>{{ el.title }}</b>
+        </p>
 
-          <div class="btn">
-            <button @click="setDone(el.id, true)">Done</button>
-          </div>
+        <div class="btn">
+          <button @click="setDone(el.id, true)">Done</button>
         </div>
       </div>
     </div>

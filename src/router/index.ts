@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/Home.vue";
-import Todo from "@/views/Todo.vue";
+import Todo from "@/views/TodoTask.vue";
 import NotFound from "@/views/NotFound.vue";
-import Slide from "@/views/Slide.vue";
+import Slide from "@/views/SlideShow.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -13,7 +13,7 @@ const router = createRouter({
     },
     {
       path: "/todo",
-      name: "Todo",
+      name: "TodoTask",
       component: Todo,
     },
     {

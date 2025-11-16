@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Head2 from "@/components/Head2.vue";
+import HeadComponent from "@/components/HeadComponent.vue";
 </script>
 
 <template>
-  <Head2 head="Todo tasks" />
+  <HeadComponent head="Todo tasks" />
   <div class="nf-container">
     <h1>404</h1>
     <h1>Not found</h1>

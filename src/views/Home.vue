@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import Head2 from "@/components/Head2.vue";
+import HeadComponent from "@/components/HeadComponent.vue";
 const email = ref("");
 const password = ref("");
 const banner = ref(false);
@@ -39,7 +39,7 @@ function signup() {
 </script>
 
 <template>
-  <Head2 head="Home" />
+  <HeadComponent head="Home" />
   <div class="home-container">
     <h1>Login</h1>
 
