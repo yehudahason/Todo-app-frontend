@@ -1,13 +1,7 @@
 # todo-frontend
 
-## Project Setup
-
-```sh
 npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
-```
+
+open http://localhost:5173/
